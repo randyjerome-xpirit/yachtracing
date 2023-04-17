@@ -1,2 +1,2 @@
 # yachtracing
-A demo app based around yacht racing
+A demo app based around score keeping for yacht racing series events
