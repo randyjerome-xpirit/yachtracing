@@ -15,7 +15,10 @@ builder.Services.AddSwaggerGen(e =>
     });
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-    e.IncludeXmlComments(xmlPath);
+    if (File.Exists(xmlPath))
+    {
+        e.IncludeXmlComments(xmlPath);
+    }
 });
 
 var app = builder.Build();
