@@ -10,11 +10,9 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI(e => e.SwaggerEndpoint("/swagger/swagger.json", "Yacht Racing API"));
+
 
 app.UseHttpsRedirection();
 
