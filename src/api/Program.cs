@@ -13,7 +13,6 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI(e => e.SwaggerEndpoint("/swagger/swagger.json", "Yacht Racing API"));
 
-
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
