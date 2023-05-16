@@ -4,7 +4,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+   .AddJsonOptions(e =>
+   {
+       e.JsonSerializerOptions.WriteIndented = true;
+       e.JsonSerializerOptions.PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase;
+   });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(e =>
@@ -25,7 +30,7 @@ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 app.UseSwagger();
-app.UseSwaggerUI(e => e.SwaggerEndpoint("/swagger/swagger.json", "Yacht Racing API"));
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
