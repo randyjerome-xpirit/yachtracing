@@ -1,8 +1,13 @@
-﻿using System.Reflection;
+﻿using infrastructure.Database;
+using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddDbContext<YachtDbContext>(options =>
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DatabaseConnection")));
 
 builder.Services.AddControllers()
    .AddJsonOptions(e =>
