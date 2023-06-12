@@ -10,6 +10,10 @@ using System.Threading.Tasks;
 namespace infrastructure.Database;
 public class YachtDbContext : DbContext
 {
+    public YachtDbContext(DbContextOptions<YachtDbContext> options) : base(options)
+    {
+        
+    }
     public DbSet<Yacht> yachts { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
