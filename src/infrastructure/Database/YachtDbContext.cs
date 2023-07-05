@@ -14,7 +14,8 @@ public class YachtDbContext : DbContext
     {
         
     }
-    public DbSet<Yacht> yachts { get; set; }
+    public DbSet<Yacht> Yachts { get; set; }
+    public DbSet<YachtClub> YachtClubs { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

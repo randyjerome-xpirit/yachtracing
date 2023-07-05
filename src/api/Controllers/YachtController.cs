@@ -17,7 +17,7 @@ public class YachtController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> Get(CancellationToken cancellationToken = default)
     {
-        var retval = await _dbContext.yachts.ToListAsync(cancellationToken);
+        var retval = await _dbContext.Yachts.ToListAsync(cancellationToken);
         return Ok(retval);
     }
 }
