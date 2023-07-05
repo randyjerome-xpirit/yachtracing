@@ -7,7 +7,7 @@ public sealed class YachtConfiguration : IEntityTypeConfiguration<Yacht>
 {
     public void Configure(EntityTypeBuilder<Yacht> builder)
     {
-        builder.ToTable("yachts");
+        builder.ToTable("Yachts");
         builder.Property(e => e.Name)
             .IsRequired()
             .HasMaxLength(100);
@@ -17,5 +17,6 @@ public sealed class YachtConfiguration : IEntityTypeConfiguration<Yacht>
         builder.Property(e => e.Make)
             .IsRequired()
             .HasMaxLength(100);
+        builder.HasOne(e => e.Owner).WithMany(e => e.Yachts);
     }
 }

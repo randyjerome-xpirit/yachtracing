@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using infrastructure.Database;
 
@@ -11,9 +12,11 @@ using infrastructure.Database;
 namespace infrastructure.Migrations
 {
     [DbContext(typeof(YachtDbContext))]
-    partial class YachtDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230630132701_YachClubs-Update")]
+    partial class YachClubsUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -99,14 +102,9 @@ namespace infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int?>("OwnerId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("HomeYachtClubId");
-
-                    b.HasIndex("OwnerId");
 
                     b.ToTable("Yachts", (string)null);
                 });
@@ -178,20 +176,12 @@ namespace infrastructure.Migrations
                         .WithMany()
                         .HasForeignKey("HomeYachtClubId");
 
-                    b.HasOne("domain.entities.Person", "Owner")
-                        .WithMany("Yachts")
-                        .HasForeignKey("OwnerId");
-
                     b.Navigation("HomeYachtClub");
-
-                    b.Navigation("Owner");
                 });
 
             modelBuilder.Entity("domain.entities.Person", b =>
                 {
                     b.Navigation("Crews");
-
-                    b.Navigation("Yachts");
                 });
 #pragma warning restore 612, 618
         }

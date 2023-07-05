@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using infrastructure.Database;
 
@@ -11,9 +12,11 @@ using infrastructure.Database;
 namespace infrastructure.Migrations
 {
     [DbContext(typeof(YachtDbContext))]
-    partial class YachtDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230616141022_AddingCrew")]
+    partial class AddingCrew
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,9 +39,8 @@ namespace infrastructure.Migrations
                     b.Property<int?>("YachtId")
                         .HasColumnType("int");
 
-                    b.Property<string>("position")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("position")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -69,7 +71,7 @@ namespace infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("People", (string)null);
+                    b.ToTable("people", (string)null);
                 });
 
             modelBuilder.Entity("domain.entities.Yacht", b =>
@@ -99,16 +101,11 @@ namespace infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int?>("OwnerId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("HomeYachtClubId");
 
-                    b.HasIndex("OwnerId");
-
-                    b.ToTable("Yachts", (string)null);
+                    b.ToTable("yachts", (string)null);
                 });
 
             modelBuilder.Entity("domain.entities.YachtClub", b =>
@@ -121,12 +118,11 @@ namespace infrastructure.Migrations
 
                     b.Property<string>("Address1")
                         .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Address2")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -142,17 +138,15 @@ namespace infrastructure.Migrations
 
                     b.Property<string>("PostalCode")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("State")
                         .IsRequired()
-                        .HasMaxLength(2)
-                        .HasColumnType("nvarchar(2)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("YachtClubs", (string)null);
+                    b.ToTable("YachtClub");
                 });
 
             modelBuilder.Entity("domain.entities.Crew", b =>
@@ -178,20 +172,12 @@ namespace infrastructure.Migrations
                         .WithMany()
                         .HasForeignKey("HomeYachtClubId");
 
-                    b.HasOne("domain.entities.Person", "Owner")
-                        .WithMany("Yachts")
-                        .HasForeignKey("OwnerId");
-
                     b.Navigation("HomeYachtClub");
-
-                    b.Navigation("Owner");
                 });
 
             modelBuilder.Entity("domain.entities.Person", b =>
                 {
                     b.Navigation("Crews");
-
-                    b.Navigation("Yachts");
                 });
 #pragma warning restore 612, 618
         }

@@ -8,10 +8,10 @@ public class YachtClub
     public int Id { get; set; }
     public string Name { get; set; } = string.Empty;
     public string Address1 { get; set; } = string.Empty;
-    public string Address2 { get; set; }
-    public string City { get; set; }
-    public string State { get; set; }
-    public string PostalCode { get; set; }
-    public string Country { get; set; }
+    public string? Address2 { get; set; }
+    public string City { get; set; } = string.Empty;
+    public string State { get; set; } = string.Empty;
+    public string PostalCode { get; set; } = string.Empty;
+    public string Country { get; set; } = string.Empty;
 }
 
