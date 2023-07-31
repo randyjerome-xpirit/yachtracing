@@ -10,16 +10,10 @@ namespace api.Controllers;
 public class YachtClubController : ControllerBase
 {
     private readonly YachtDbContext _dbContext;
-    public YachtClubController()
+
+    public YachtClubController(YachtDbContext yachtDbContext)
     {
-        var dbOpts = new DbContextOptionsBuilder<YachtDbContext>();
-        var configBuilder = new ConfigurationBuilder();
-        configBuilder.AddJsonFile("appsettings.json");
-        var configRoot = configBuilder.Build();
-
-
-        dbOpts.UseSqlServer(configRoot.GetConnectionString("DatabaseConnection"));
-        _dbContext = new YachtDbContext(dbOpts.Options);
+        _dbContext = yachtDbContext;
     }
 
     [HttpGet]
